@@ -45,10 +45,12 @@ int main (){
 	      {
 	        if(arr[i])
 	        {
-	           printf("%d \n",i) ;
+		   // printing prime numbers in a range N	
+	           printf("%d \n",i) ; 
 	           Prime_counter ++ ;
 	        }
 	      }
+	      // if you want to know how many prime number found from 0 to N	
 	      printf("%d \n" ,Prime_counter) ;
     
 }
