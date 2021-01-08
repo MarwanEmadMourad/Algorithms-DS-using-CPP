@@ -53,6 +53,7 @@ int main (){
 	      // if you want to know how many prime number found from 0 to N	
 	      printf("%d \n" ,Prime_counter) ;
     
+	return 0 ;
 }
 
 
