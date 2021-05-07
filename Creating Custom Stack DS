@@ -1,0 +1,50 @@
+//implementing stack DS using vectors
+
+/**
+ * Your CustomStack object will be instantiated and called as such:
+ * CustomStack* obj = new CustomStack(maxSize);
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * obj->increment(k,val);
+ */
+
+class CustomStack {
+public:
+    int size = 0 ;
+    int top = 0 ;
+    vector <int> st ;
+    
+    CustomStack(int maxSize) {
+        size=maxSize ;
+    }
+    
+    void push(int x) {
+        if (top<size) {
+            top++;
+            st.push_back(x);
+        }
+        //st.shrink_to_fit();
+    }
+    
+    int pop() {
+        if (top>0){
+          int temp = st[top-1] ;
+          top--;
+          st.pop_back() ;
+          return temp ;
+        }
+        return -1 ;
+    }
+    
+    //this function Increments the bottom k elements of the stack by val. If there are less than k elements in the stack, just increment all the elements in the stack.
+    void increment(int k, int val) {
+        if (k>=st.size()){
+            for (auto &num:st) num+=val ;
+        }
+        else {
+            for (int i = 0 ; i < k ; i++){
+                st[i]+=val ;
+            }
+        }
+    }
+};
