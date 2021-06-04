@@ -1,0 +1,56 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+ 
+ // Given a tree root, return the sum of all leaves with maximum depth
+class Solution {
+public:
+    int deepestLeavesSum(TreeNode* root) {
+    // Queue for level traversing
+        queue <TreeNode*> q ;
+        q.push(root);
+        TreeNode* p = root ;
+        
+        // the deepest level
+        int mx_lv = 0 ; 
+        
+        // Data structure to hold the nodes and it's levels
+        unordered_multimap<TreeNode*,int> m ;
+        m.insert(make_pair(root,0));
+        
+        // Traversing
+        while(q.size()>0){
+            p=q.front() ;
+            q.pop() ;
+            auto it = m.find(p);
+
+            if (p->left){
+                m.insert(make_pair(p->left,it->second+1)) ;
+                mx_lv = max(mx_lv,(it->second)+1);
+                q.push(p->left);
+            }
+            if(p->right){
+                m.insert(make_pair(p->right,it->second+1)) ;
+                mx_lv = max(mx_lv,(it->second)+1);
+                q.push(p->right);
+            }
+        }
+        
+        // accumulate the keys(nodes), with a value of the maximum level means deepest level.
+        int sum = 0 ;
+        for (const auto pair:m)
+        {
+            if(pair.second==mx_lv)
+                sum+=(pair.first)->val ;
+        }
+        return sum ;
+    }
+};
